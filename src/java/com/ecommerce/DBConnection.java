@@ -6,9 +6,13 @@ import java.sql.DriverManager;
 public class DBConnection {
 
     private static final String URL
-            = "jdbc:mysql://localhost:3306/ecommerce_db";
-    private static final String USER = "root";
-    private static final String PASSWORD = "";
+            = "jdbc:mysql://" + System.getenv("DB_HOST")
+            + ":" + System.getenv("DB_PORT")
+            + "/" + System.getenv("DB_NAME")
+            + "?useSSL=true&requireSSL=true";
+
+    private static final String USER = System.getenv("DB_USER");
+    private static final String PASSWORD = System.getenv("DB_PASSWORD");
 
     public static Connection getConnection() {
         Connection con = null;
@@ -32,5 +36,4 @@ public class DBConnection {
     public static void main(String[] args) {
         getConnection();
     }
-
 }
